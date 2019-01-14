@@ -56,6 +56,8 @@ sudo apt-get install festival -y
 sudo pip3 install guizero
 cd /home/pi
 
+clear
+
 sudo bash -c 'cat > /etc/dhcpcd.conf' << EOF
 # A sample configuration for dhcp# A sample configuration for dhcpcd.
 # See dhcpcd.conf(5) for details.
@@ -125,7 +127,35 @@ python 05_launcher_setup.py
 
 echo "*****************************************************************"
 
+sudo bash -c 'cat > /etc/rc.local' << EOF
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+python3 "/home/pi/rfid-reader-raspberrypi/clever_card_kit" &
+
+exit 0
+EOF
+
+sudo reboot -r 1
+
 echo "*****************************************************************"
-echo "Finished Installation"
-echo "Please REBOOT using: $ sudo reboot"
+echo "Installation Fini"
+echo "Le Raspberry Pi va redemarrer dans 1 minutes"
+echo "Vous pouvez forcer ce redémarrage avec la commande: sudo reboot"
 echo "*****************************************************************"
