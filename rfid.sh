@@ -122,7 +122,7 @@ echo "*****************************************************************"
 echo "VEUILLER RENTRER LA COMMANDE SUIVANTE : curl http://${master}/scriptv2.php?executer=ON"
 echo "!! FAITE CTRL+C APRES AVOIR PASSER VOTRE BADGE !!"
 
-cd /home/pi/rfid-reader-raspberrrypi/clever_card_kit 
+cd /home/pi/rfid-reader-raspberrypi/clever_card_kit 
 python 05_launcher_setup.py
 
 echo "*****************************************************************"
