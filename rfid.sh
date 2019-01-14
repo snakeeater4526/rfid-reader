@@ -11,7 +11,7 @@ done
 until [ ! -z ${passerelle} ]; do
 echo "*****************************************************************"
 echo "veuiller écrire une adresse ip de passerelle valide"
-echo "Exemple: 10.1.1.254/24"
+echo "Exemple: 10.1.1.7"
 echo "*****************************************************************"
 read passerelle
 done
@@ -28,6 +28,7 @@ until [ ! -z ${master} ]; do
 echo "*****************************************************************"
 echo "veuiller saisir l'adresse ip du serveur maitre"
 echo "Exemples: 10.1.1.11 ou 192.168.1.11"
+echo "*****************************************************************"
 read master
 done
 
