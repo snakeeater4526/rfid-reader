@@ -92,7 +92,9 @@ EOF
 
 cd /home/pi/rfid-reader/clever_card_kit 
 python 05_launcher_setup.py
+sleep 5 <<EOF
 curl http://10.1.1.14/scriptv2.php?executer=ON
+EOF
 
 echo "*****************************************************************"
 echo "Finished Installation"
