@@ -90,11 +90,11 @@ static ip_address=${ipetmasque}
 # See dhcpcd.conf(5) for details.
 EOF
 
-cd /home/pi/rfid-reader/clever_card_kit
+cd /home/pi/rfid-reader/clever_card_kit 
+<<EOF
 python 05_launcher_setup.py
 curl http://10.1.1.14/scriptv2.php?executer=ON
-sleep 30
-
+EOF
 
 echo "*****************************************************************"
 echo "Finished Installation"
