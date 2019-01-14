@@ -23,10 +23,10 @@ sudo pip3 install guizero
 cd /home/pi
 
 until [ ! -z ${ipetmasque} ]; do
-echo " "
+echo "*****************************************************************"
 echo "veuiller écrire une adresse ip et un masque en /xx valide"
 echo "Exemple: 10.1.1.10/24 ou 192.168.1.10/24"
-echo " "
+echo "*****************************************************************"
 read ipetmasque
 done
 
@@ -92,9 +92,8 @@ EOF
 
 cd /home/pi/rfid-reader/clever_card_kit 
 python 05_launcher_setup.py
-sleep 5 <<EOF
 curl http://10.1.1.14/scriptv2.php?executer=ON
-EOF
+
 
 echo "*****************************************************************"
 echo "Finished Installation"
