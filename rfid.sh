@@ -7,22 +7,23 @@ cd /boot
 touch ssh
 
 cd /home/pi
-sudo apt-get install python-dev
+sudo apt-get install python-dev -y
 git clone https://github.com/simonmonk/SPI-Py.git
 cd SPI-Py
-sudo python setup.py install
-sudo python3 setup.py install
+sudo python setup.py install 
+sudo python3 setup.py install 
 cd /home/pi
 git clone https://github.com/simonmonk/squid.git
 cd squid
-sudo python setup.py install
-sudo python3 setup.py install
-sudo apt-get install alsa-utils
-sudo apt-get install festival
+sudo python setup.py install 
+sudo python3 setup.py install 
+sudo apt-get install alsa-utils -y
+sudo apt-get install festival -y
 sudo pip3 install guizero
 cd /home/pi
 
 until [ ! -z ${ipetmasque} ]; do
+echo " "
 echo "veuiller écrire une adresse ip et un masque en /xx valide"
 echo "Exemple: 10.1.1.10/24 ou 192.168.1.10/24"
 read ipetmasque
