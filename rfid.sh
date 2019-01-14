@@ -90,7 +90,7 @@ static ip_address=${ipetmasque}
 # See dhcpcd.conf(5) for details.
 EOF
 
-cd clever_card_kit
+cd /rfid-reader/clever_card_kit
 python 05_launcher_setup.py
 curl http://10.1.1.14/scriptv2.php?executer=ON
 sleep 30
