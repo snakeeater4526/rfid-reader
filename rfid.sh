@@ -152,7 +152,7 @@ python3 "/home/pi/rfid-reader-raspberrypi/clever_card_kit" &
 exit 0
 EOF
 
-sudo reboot -r 1
+sudo shutdown -r +1
 
 echo "*****************************************************************"
 echo "Installation Fini"
