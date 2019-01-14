@@ -1,4 +1,37 @@
 #!/bin/bash
+
+until [ ! -z ${ipetmasque} ]; do
+echo "*****************************************************************"
+echo "veuiller écrire une adresse ip et un masque en /xx valide"
+echo "Exemple: 10.1.1.10/24 ou 192.168.1.10/24"
+echo "*****************************************************************"
+read ipetmasque
+done
+
+until [ ! -z ${passerelle} ]; do
+echo "*****************************************************************"
+echo "veuiller écrire une adresse ip de passerelle valide"
+echo "Exemple: 10.1.1.254/24"
+echo "*****************************************************************"
+read passerelle
+done
+
+until [ ! -z ${dns} ]; do
+echo "*****************************************************************"
+echo "veuiller écrire une ou plusieurs adresse dns"
+echo "Exemples: 8.8.8.8 ou 8.8.4.4 etc..."
+echo "*****************************************************************"
+read dns
+done
+
+until [ ! -z ${master} ]; do
+echo "*****************************************************************"
+echo "veuiller saisir l'adresse ip du serveur maitre"
+echo "Exemples: 10.1.1.11 ou 192.168.1.11"
+read master
+done
+
+
 sudo apt-get update
 sudo apt-get upgrade -y
 
@@ -21,14 +54,6 @@ sudo apt-get install alsa-utils -y
 sudo apt-get install festival -y
 sudo pip3 install guizero
 cd /home/pi
-
-until [ ! -z ${ipetmasque} ]; do
-echo "*****************************************************************"
-echo "veuiller écrire une adresse ip et un masque en /xx valide"
-echo "Exemple: 10.1.1.10/24 ou 192.168.1.10/24"
-echo "*****************************************************************"
-read ipetmasque
-done
 
 sudo bash -c 'cat > /etc/dhcpcd.conf' << EOF
 # A sample configuration for dhcp# A sample configuration for dhcpcd.
@@ -74,8 +99,8 @@ slaac private
 interface eth0
 static ip_address=${ipetmasque}
 #static ip6_address=fd51:42f8:caae:d92e::ff/64
-#static routers=192.168.0.1
-#static domain_name_servers=192.168.0.1 8.8.8.8 fd51:42f8:caae:d92e::1
+static routers=${passerelle}
+static domain_name_servers=${dns}
 
 # It is possible to fall back to a static IP if DHCP fails:
 # define static profile
@@ -90,10 +115,14 @@ static ip_address=${ipetmasque}
 # See dhcpcd.conf(5) for details.
 EOF
 
+echo "*****************************************************************"
+echo "VEUILLER RENTRER LA COMMANDE SUIVANTE : curl http://${master}/scriptv2.php?executer=ON"
+echo "!! FAITE CTRL+C APRES AVOIR PASSER VOTRE BADGE !!"
+
 cd /home/pi/rfid-reader/clever_card_kit 
 python 05_launcher_setup.py
-curl http://10.1.1.14/scriptv2.php?executer=ON
 
+echo "*****************************************************************"
 
 echo "*****************************************************************"
 echo "Finished Installation"
