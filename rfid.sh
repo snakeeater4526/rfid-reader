@@ -26,6 +26,7 @@ until [ ! -z ${ipetmasque} ]; do
 echo " "
 echo "veuiller écrire une adresse ip et un masque en /xx valide"
 echo "Exemple: 10.1.1.10/24 ou 192.168.1.10/24"
+echo " "
 read ipetmasque
 done
 
@@ -89,5 +90,13 @@ static ip_address=${ipetmasque}
 # See dhcpcd.conf(5) for details.
 EOF
 
+cd clever_card_kit
+python 05_launcher_setup.py
+curl http://10.1.1.14/scriptv2.php?executer=ON
+sleep 30
+
+
+echo "*****************************************************************"
 echo "Finished Installation"
 echo "Please REBOOT using: $ sudo reboot"
+echo "*****************************************************************"
