@@ -147,7 +147,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-python3 "/home/pi/rfid-reader-raspberrypi/clever_card_kit" &
+python3 "/home/pi/rfid-reader-raspberrypi/clever_card_kit/05_launcher.py" &
 
 exit 0
 EOF
