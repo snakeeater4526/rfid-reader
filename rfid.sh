@@ -33,8 +33,8 @@ read master
 done
 
 
-sudo apt-get update
-sudo apt-get upgrade -y
+#sudo apt-get update
+#sudo apt-get upgrade -y
 
 echo "dtparam=spi=on">>/boot/config.txt
 cd /boot
