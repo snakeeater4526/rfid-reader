@@ -123,7 +123,7 @@ echo "VEUILLER RENTRER LA COMMANDE SUIVANTE : curl http://${master}/scriptv2.php
 echo "!! FAITE CTRL+C APRES AVOIR PASSER VOTRE BADGE !!"
 
 cd /home/pi/rfid-reader-raspberrypi/clever_card_kit 
-python 05_launcher_setup.py
+sudo python 05_launcher_setup.py
 
 echo "*****************************************************************"
 
@@ -147,7 +147,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-python "/home/pi/rfid-reader-raspberrypi/clever_card_kit/05_launcher.py" &
+sudo python "/home/pi/rfid-reader-raspberrypi/clever_card_kit/05_launcher.py" &
 
 exit 0
 EOF
