@@ -147,7 +147,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-(cd rfid-reader-raspberrypi/clever_card_kit/ && sudo python 05_launcher.py) &
+(cd /home/pi/rfid-reader-raspberrypi/clever_card_kit/ && sudo python 05_launcher.py) &
 
 
 exit 0
