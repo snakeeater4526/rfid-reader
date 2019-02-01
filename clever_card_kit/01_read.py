@@ -27,13 +27,11 @@ try:
         ip_from = s.getsockname()[0]  
         s.close()
         
-        os.system('curl -X GET "http://10.1.1.147?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content=clement_serouart"')
+        os.system('curl -X GET "http://10.1.1.147?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content='+text+'"')
 
 
         time.sleep(5)
 finally:
     print("cleaning up")
     GPIO.cleanup()
-
-       s.close()
          
