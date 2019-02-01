@@ -27,7 +27,7 @@ done
 until [ ! -z ${master} ]; do
 echo "*****************************************************************"
 echo "veuiller saisir l'adresse ip du serveur maitre"
-echo "Exemples: 10.1.1.27 "
+echo "Exemples: 10.1.1.14 "
 echo "*****************************************************************"
 read master
 done
