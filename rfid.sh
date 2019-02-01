@@ -147,14 +147,14 @@ try:
         print(s.getsockname()[0])
         ip_from = s.getsockname()[0]  
         s.close()
-        
-        os.system('curl -X GET "http://10.1.1.147?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content='+text+'"')
+        os.system('curl -X GET "http://10.1.1.147?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content='+text.replace(" ", '%20')+'"')
+
 
 
         time.sleep(5)
 finally:
     print("cleaning up")
-GPIO.cleanup()
+    GPIO.cleanup()
 EOF
 
 sudo bash -c 'cat > /etc/rc.local' << EOF
