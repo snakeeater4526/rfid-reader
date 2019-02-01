@@ -119,7 +119,9 @@ static domain_name_servers=${dns}
 EOF
 
 echo "*****************************************************************"
+echo " "
 echo "VEUILLER RENTRER LA COMMANDE SUIVANTE : curl http://${master}/scriptv2.php?executer=ON"
+echo " "
 echo "!! FAITE CTRL+C APRES AVOIR PASSER VOTRE BADGE !!"
 
 cd /home/pi/rfid-reader-raspberrypi/clever_card_kit 
