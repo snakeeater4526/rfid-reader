@@ -154,8 +154,6 @@ try:
 finally:
     print("cleaning up")
     GPIO.cleanup()
-
-s.close()
 EOF
 
 sudo bash -c 'cat > /etc/rc.local' << EOF
