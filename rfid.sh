@@ -33,8 +33,8 @@ read master
 done
 
 
-#sudo apt-get update
-#sudo apt-get upgrade -y
+sudo apt-get update
+sudo apt-get upgrade 
 
 echo "dtparam=spi=on">>/boot/config.txt
 cd /boot
@@ -118,16 +118,45 @@ static domain_name_servers=${dns}
 # See dhcpcd.conf(5) for details.
 EOF
 
-echo "*****************************************************************"
-echo " "
-echo "VEUILLER RENTRER LA COMMANDE SUIVANTE : curl http://${master}/scriptv2.php?executer=ON"
-echo " "
-echo "!! FAITE CTRL+C APRES AVOIR PASSER VOTRE BADGE !!"
+sudo bash -c 'cat > /home/pi/rfid-reader-raspberrypi' << EOF
+#!/usr/bin/env python
 
-cd /home/pi/rfid-reader-raspberrypi/clever_card_kit 
-sudo python 05_launcher_setup.py
+import os
+import RPi.GPIO as GPIO
+import SimpleMFRC522
+import time
+import socket
 
-echo "*****************************************************************"
+reader = SimpleMFRC522.SimpleMFRC522()
+
+print("Hold a tag near the reader")
+
+try:
+    while True:
+        id, text = reader.read()
+        print(id)
+        print(text)
+        file = open("badge_id_and_name.txt","w")
+        file.write('{0}'.format(id))
+        file.write("\n")
+        file.write('{0}'.format(text))
+        file.close()
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        print(s.getsockname()[0])
+        ip_from = s.getsockname()[0]  
+        s.close()
+        
+        os.system('curl -X GET "http://${master}?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content=clement_serouart"')
+
+        time.sleep(5)
+finally:
+    print("cleaning up")
+    GPIO.cleanup()
+
+s.close()
+EOF
 
 sudo bash -c 'cat > /etc/rc.local' << EOF
 #!/bin/sh -e
@@ -149,7 +178,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-(cd /home/pi/rfid-reader-raspberrypi/clever_card_kit/ && sudo python 05_launcher.py) &
+(cd /home/pi/rfid-reader-raspberrypi/clever_card_kit/ && sudo python 01_read.py) &
 
 
 exit 0
