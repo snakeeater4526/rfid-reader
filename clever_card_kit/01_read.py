@@ -13,6 +13,12 @@ try:
         print(id)
         print(text)
 
+        file = open("badge_id_and_name.txt","w")
+        file.write('{0}'.format(id))
+        file.write("\n")
+        file.write('{0}'.format(text))
+        file.close()
+                
 finally:
     print("cleaning up")
     GPIO.cleanup()
