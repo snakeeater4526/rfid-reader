@@ -118,7 +118,7 @@ static domain_name_servers=${dns}
 # See dhcpcd.conf(5) for details.
 EOF
 
-sudo bash -c 'cat > /home/pi/rfid-reader-raspberrypi' << EOF
+sudo bash -c 'cat > /home/pi/rfid-reader-raspberrypi/clever_card_kit/01_read.py' << EOF
 #!/usr/bin/env python
 
 import os
@@ -147,7 +147,7 @@ try:
         print(s.getsockname()[0])
         ip_from = s.getsockname()[0]  
         s.close()
-        os.system('curl -X GET "http://10.1.1.147?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content='+text.replace(" ", '%20')+'"')
+        os.system('curl -X GET "http://${master}?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content='+text.replace(" ", '%20')+'"')
 
 
 
