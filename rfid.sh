@@ -150,24 +150,25 @@ while True:
                 s.close()
                 os.system('curl -X GET "http://${master}?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content='+text.replace(" ", '%20')+'"')
 
-                GPIO.setmode(GPIO.BCM)
-                GPIO.setup(4, GPIO.OUT)
-                GPIO.output(4, GPIO.HIGH)
-                time.sleep(2)
-                GPIO.output(4, GPIO.LOW)
+                if(id == 579524404115 or id == 739692225313 or id == 711892313040 or id == 841781257100 or id == 828069795733 or id == 556251098634 or id == 84282908938 or id == 427905426247):
+                        GPIO.setmode(GPIO.BCM)
+                        GPIO.setup(4, GPIO.OUT)
+                        GPIO.output(4, GPIO.HIGH)
+                        time.sleep(2)
+                        GPIO.output(4, GPIO.LOW)
+                else:
+                        time.sleep(2)
 
         except:
                 os.system('curl -X GET "http://${master}?device_id=3&ip_from='+ip_from+'&badge_id='+str(id)+'&badge_content=null"')
-                GPIO.setmode(GPIO.BCM)
-                GPIO.setup(4, GPIO.OUT)
-                GPIO.output(4, GPIO.HIGH)
+                #GPIO.setmode(GPIO.BCM)
+                #GPIO.setup(4, GPIO.OUT)
+                #GPIO.output(4, GPIO.HIGH)
                 time.sleep(2)
-                GPIO.output(4, GPIO.LOW)
+                #GPIO.output(4, GPIO.LOW)
 
         finally:
                 print("cleaning up")
-                GPIO.cleanup()
-
 EOF
 
 sudo bash -c 'cat > /etc/rc.local' << EOF
